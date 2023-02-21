@@ -2,15 +2,26 @@
 
 #include "Arduino.h"
 
-constexpr int MinToMicroSeconds(int lMinutes)
+// resumed millis, will be written before we enter deep sleep
+RTC_DATA_ATTR unsigned long ulResumedMillis = 0;
+
+constexpr uint64_t MinToMicroSeconds(int lMinutes)
 {
-  return lMinutes * 1000000ULL * 60;
+  return lMinutes * 1000000ULL * 60ULL;
+}
+
+constexpr uint64_t MinToMilliSeconds(int lMinutes)
+{
+  return lMinutes * 1000ULL * 60ULL;
 }
 
 void DeepSleep(int lMinutes)
 {
   Serial.println("Sending into deep sleep for " + String(lMinutes) + " minutes");
   delay(1000);
+
+  // add sleep time
+  ulResumedMillis = millisReal() + MinToMilliSeconds(lMinutes);
 
   /*
   First we configure the wake up source
@@ -40,4 +51,9 @@ void DeepSleep(int lMinutes)
   Serial.println("Going to sleep now");
   Serial.flush(); 
   esp_deep_sleep_start();
+}
+
+unsigned long millisReal()
+{
+  return millis() + ulResumedMillis;
 }

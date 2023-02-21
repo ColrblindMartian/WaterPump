@@ -3,6 +3,7 @@
 #include "Arduino.h"
 #include "PinHandler.h"
 #include "MailHandler.h"
+#include "DeepSleep.h"
 
 void setupPump()
 {
@@ -64,7 +65,7 @@ bool TankFull(unsigned long ulLastPumpAction)
   // maybe upper sensor was damaged?
   // if both sensors are damaged than all hope is lost :)
   if(!bTankEmpty && ulLastPumpAction != 0 &&
-     millis() - ulLastPumpAction > getMaxInactionTimoutMS())
+     millisReal() - ulLastPumpAction > getMaxInactionTimoutMS())
   {
     Serial.println("Max inactive timeout reached - enable pump");
     sendMail("WaterPump - Timeout", "Inacitve Timeout reached", "Pump will be activated<b>check Sensors!!");
@@ -123,7 +124,7 @@ void pumpControlLoop(unsigned long& ulLastPumpAction)
   }while(!TankEmpty() || bDoNotTrustSensor); 
   
   togglePump(false);
-  ulLastPumpAction = millis();
+  ulLastPumpAction = millisReal();
 
   if(bSafetySwitchOccured)
   {
