@@ -5,11 +5,11 @@
 
 enum class EPin : int
 {
-  eWaterSensorUpper = 23,
-  eWaterSensorLower = 22,
-  eSensorOutUpper   = 19,
-  eSensorOutLower   = 18,
-  ePumpOut          = 0,
+  eWaterSensorUpper = 22,
+  eSensorOutUpper   = 23,
+  eWaterSensorLower = 18,
+  eSensorOutLower   = 19,
+  ePumpOut          = 5,
 
 };
 

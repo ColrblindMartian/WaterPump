@@ -7,8 +7,8 @@
 
 void setupPump()
 {
-  pinMode((uint8_t)EPin::eWaterSensorUpper, INPUT);
-  pinMode((uint8_t)EPin::eWaterSensorLower, INPUT);
+  pinMode((uint8_t)EPin::eWaterSensorUpper, INPUT_PULLDOWN);
+  pinMode((uint8_t)EPin::eWaterSensorLower, INPUT_PULLDOWN);
 
   // sensors are not directly coonected to 3,3V
   // to make sure no power loss occures during deep sleep
