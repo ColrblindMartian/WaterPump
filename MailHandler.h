@@ -17,6 +17,5 @@ void sendMail(const String& strSubject,
 bool mailListEmpty();
 // send mails that are saved in the buffer
 bool sendBufferedMails();
-void testBuffer();
 
 #endif

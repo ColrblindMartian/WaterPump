@@ -49,6 +49,9 @@ bool readSensor(EPin sensor)
       delay(10);
     bSensorActive &= digitalRead((uint8_t)sensor);
   }
+  //char log[20];
+  //sprintf(log, "Sensor %i is %s",(uint8_t)sensor, bSensorActive?"high":"low");
+  //Serial.println(log);
   return bSensorActive;
 }
 

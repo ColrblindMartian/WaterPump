@@ -7,6 +7,8 @@
 #include <ESP_Mail_Client.h>
 #include "time.h"
 
+#include "DeepSleep.h"
+
 #if defined(ESP32)
   #include <WiFi.h>
 #elif defined(ESP8266)
@@ -214,8 +216,11 @@ void sendMail(const String& strSubject,
   message.sender.email = AUTHOR_EMAIL;
   message.subject = strSubject;
   message.addRecipient("RobotMaster", RECIPIENT_EMAIL);
+  
 
   String strTime;
+  strTime += "MillisReal: " + String(millisReal()) + "<br>";
+  
   {
   wifiSetup();
   tm timeinfo;
@@ -223,11 +228,11 @@ void sendMail(const String& strSubject,
   if(!getLocalTime(&timeinfo))
   {
     Serial.println("Failed to obtain time");
-    strTime = "Error getting time";
+    strTime += "Error getting time";
   }
   else
   {
-    strTime = asctime(&timeinfo);
+    strTime += asctime(&timeinfo);
   }
   }
 

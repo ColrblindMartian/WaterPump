@@ -1,10 +1,8 @@
 /*
  Name:    WaterPump.ino
  Created:  1/27/2023 8:07:51 PM
- Author:  Sebastian Aznaid
 */
 
-//#include "MailNotification.h"
 #include "MailHandler.h"
 #include "DeepSleep.h"
 #include "Pump.h"
